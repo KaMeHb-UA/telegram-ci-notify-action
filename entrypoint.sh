@@ -46,6 +46,7 @@ send_msg(){
 
 if [ "$STATUS" = failure ]; then
     send_msg "$FAIL_TEXT"
+    exit 1
 elif [ "$STATUS" = success ]; then
     send_msg "$SUCCESS_TEXT"
 fi
