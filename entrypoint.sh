@@ -10,6 +10,8 @@ GIT_BRANCH="${GITHUB_REF#refs/heads/}"
 
 SUCCESS_TEXT="$(cat - <<EOF
 Successfully built <a href="https://github.com/$GITHUB_REPOSITORY/commit/$GIT_SHA">$GITHUB_REPOSITORY@$GIT_SHA</a> and pushed as <a href="$CONTAINER_LINK">$CONTAINER_NAME</a>
+
+#$MESSAGE_HASHTAG
 EOF
 )"
 
@@ -29,7 +31,8 @@ FAIL_TEXT="$(cat - <<EOF
 <b>$(get_warning_header)</b>
 Failed to build <a href="https://github.com/$GITHUB_REPOSITORY/commit/$GIT_SHA">$GITHUB_REPOSITORY@$GIT_SHA</a>.
 This appeared on <code>$GIT_BRANCH</code> branch. Please, resolve issues and run this action again
-EOF
+
+#$MESSAGE_HASHTAG
 EOF
 )"
 
