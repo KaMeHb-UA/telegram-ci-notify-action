@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-SUCCESS="$1"
+STATUS="$1"
 TG_BOT_TOKEN="$2"
 TG_LOG_CHAT="$3"
 CONTAINER_NAME="$4"
@@ -44,3 +44,8 @@ send_msg(){
         https://api.telegram.org/bot$TG_BOT_TOKEN/sendMessage
 }
 
+if [ "$STATUS" = failure ]; then
+    send_msg "$FAIL_TEXT"
+elif [ "$STATUS" = success ]; then
+    send_msg "$SUCCESS_TEXT"
+fi
