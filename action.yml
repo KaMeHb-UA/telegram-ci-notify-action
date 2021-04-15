@@ -1,0 +1,38 @@
+name: 'Telegram CI notify'
+description: 'Sends notifications to Telegram chat after successfull or not docker build'
+
+inputs:
+  success:
+    description: 'If previvios step was successfull'
+    required: true
+    default: true
+  bot-token:
+    description: 'Telegram bot token'
+    required: true
+    default: ''
+  chat-id:
+    description: 'Chat ID to send notify to'
+    required: true
+    default: ''
+  container-name:
+    description: 'Built container name'
+    required: true
+    default: ''
+  container-link:
+    description: 'Link to container page'
+    required: true
+    default: ''
+  message-tag:
+    description: 'Hashtag in message'
+    required: false
+    default: 'ci'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.success }}
+    - ${{ inputs.bot-token }}
+    - ${{ inputs.chat-id }}
+    - ${{ inputs.container-name }}
+    - ${{ inputs.container-link }}
+    - ${{ inputs.message-tag }}
