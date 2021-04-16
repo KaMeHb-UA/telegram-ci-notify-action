@@ -29,6 +29,18 @@ This action sends Telegram message with build status using your bot to specified
 
 Hashtag in message
 
+### `fail-on-status`
+
+Whether to fail if previous step has failed
+
+### `skip-is-fail`
+
+Do threat skip as fail
+
+### `cancel-is-fail`
+
+Do threat cancel as fail
+
 ## Example usage
 
 ```yaml

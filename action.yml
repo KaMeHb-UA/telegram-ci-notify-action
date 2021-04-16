@@ -26,6 +26,18 @@ inputs:
     description: 'Hashtag in message'
     required: false
     default: 'ci'
+  fail-on-status:
+    description: 'Whether to fail if previvous step was failed'
+    required: false
+    default: false
+  skip-is-fail:
+    description: 'Do threat skip as fail'
+    required: false
+    default: false
+  cancel-is-fail:
+    description: 'Do threat cancel as fail'
+    required: false
+    default: false
 runs:
   using: 'docker'
   image: 'Dockerfile'

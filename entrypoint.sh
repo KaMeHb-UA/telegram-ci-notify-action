@@ -5,6 +5,9 @@ TG_LOG_CHAT="$3"
 CONTAINER_NAME="$4"
 CONTAINER_LINK="$5"
 MESSAGE_HASHTAG="$6"
+FAIL_ON_STATUS="$7"
+SKIP_IS_FAIL="$8"
+CANCEL_IS_FAIL="$9"
 GIT_SHA="${GITHUB_SHA::7}"
 GIT_BRANCH="${GITHUB_REF#refs/heads/}"
 
@@ -44,9 +47,21 @@ send_msg(){
         https://api.telegram.org/bot$TG_BOT_TOKEN/sendMessage
 }
 
+declare IS_FAILED
+
 if [ "$STATUS" = failure ]; then
     send_msg "$FAIL_TEXT"
-    exit 1
+    IS_FAILED="true"
 elif [ "$STATUS" = success ]; then
     send_msg "$SUCCESS_TEXT"
+elif [ "$SKIP_IS_FAIL" = 'true' ] && [ "$STATUS" = skipped ]; then
+    send_msg "$FAIL_TEXT"
+    IS_FAILED="true"
+elif [ "$CANCEL_IS_FAIL" = 'true' ] && [ "$STATUS" = cancelled ]; then
+    send_msg "$FAIL_TEXT"
+    IS_FAILED="true"
+fi
+
+if [ "$FAIL_ON_STATUS" = 'true' ] && [ "$IS_FAILED" = 'true' ]; then
+    exit 1
 fi
