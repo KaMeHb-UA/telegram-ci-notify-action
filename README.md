@@ -1,7 +1,7 @@
 # Telegram CI notify action
 
 This action sends Telegram message with build status using your bot to specified chat.  
-**Does not send any notify if build stage was skipped or canceled!**
+**Does not send any notify if build stage was skipped or canceled by default, but you cat tune it with `skip-is-fail` and `cancel-is-fail`**
 
 ## Inputs
 
@@ -45,7 +45,7 @@ Do threat cancel as fail
 
 ```yaml
 name: Send notify to Telegam
-uses: KaMeHb-UA/telegram-ci-notify-action@v1
+uses: KaMeHb-UA/telegram-ci-notify-action@v3
 if: ${{ always() }}
 with:
   status: ${{ steps.<your_build_step_id>.outcome }}
