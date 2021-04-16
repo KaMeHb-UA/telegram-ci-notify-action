@@ -48,3 +48,6 @@ runs:
     - ${{ inputs.container-name }}
     - ${{ inputs.container-link }}
     - ${{ inputs.message-tag }}
+    - ${{ inputs.fail-on-status }}
+    - ${{ inputs.skip-is-fail }}
+    - ${{ inputs.cancel-is-fail }}
