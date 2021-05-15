@@ -15,11 +15,11 @@ const {
 const {
     GITHUB_REPOSITORY,
     GITHUB_SHA,
-    GIT_BRANCH,
+    GITHUB_REF,
 } = process.env;
 
 const gitHash = GITHUB_SHA.slice(0, 7);
-const gitBranch = GIT_BRANCH.slice(11);
+const gitBranch = GITHUB_REF.slice(11);
 const isOnDefaultBranch = defaultBranch ? gitBranch === defaultBranch : (gitBranch === 'master' || gitBranch === 'main');
 
 const successText = `
