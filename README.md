@@ -41,11 +41,15 @@ Do threat skip as fail
 
 Do threat cancel as fail
 
+### `default-branch`
+
+Identify the branch that is default. If build/test fails on default branch, it will be marked as a critical error
+
 ## Example usage
 
 ```yaml
 name: Send notify to Telegam
-uses: KaMeHb-UA/telegram-ci-notify-action@v3
+uses: KaMeHb-UA/telegram-ci-notify-action@v4
 if: ${{ always() }}
 with:
   status: ${{ steps.<your_build_step_id>.outcome }}
@@ -53,4 +57,6 @@ with:
   chat-id: ${{ secrets.TG_LOG_CHAT }}
   container-name: my-org/container-name
   container-link: https://my-docker-registry.com/my-org/container-name
+  skip-is-fail: true
+  default-branch: $default-branch
 ```

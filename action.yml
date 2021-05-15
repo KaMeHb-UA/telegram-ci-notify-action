@@ -38,16 +38,10 @@ inputs:
     description: 'Do threat cancel as fail'
     required: false
     default: false
+  default-branch:
+    description: 'Identify the branch that is default. If build/test fails on default branch, it will be marked as a critical error'
+    required: false
+    default: ''
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
-  args:
-    - ${{ inputs.status }}
-    - ${{ inputs.bot-token }}
-    - ${{ inputs.chat-id }}
-    - ${{ inputs.container-name }}
-    - ${{ inputs.container-link }}
-    - ${{ inputs.message-tag }}
-    - ${{ inputs.fail-on-status }}
-    - ${{ inputs.skip-is-fail }}
-    - ${{ inputs.cancel-is-fail }}
+  using: 'node15'
+  main: 'app/index.js'
