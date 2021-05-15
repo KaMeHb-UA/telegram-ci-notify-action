@@ -1,11 +1,11 @@
-import { request } from 'https';
+const { request } = require('https');
 
 /**
  * @arg {string} botToken
  * @arg {string} method
  * @arg {{[x: string]: string | number}} params
  */
-export default (botToken, method, params) => {
+module.exports = (botToken, method, params) => {
     return new Promise((resolve, reject) => {
         const req = request({
             hostname: 'api.telegram.org',

@@ -16,4 +16,4 @@ function renameVarToInput(variable){
 /** @type {{[input: string]: string}} */
 const inputs = new Proxy({}, { get: (_, name) => getInput(renameVarToInput(name)) });
 
-export default inputs;
+module.exports = inputs;

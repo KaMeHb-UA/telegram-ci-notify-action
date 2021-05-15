@@ -1,6 +1,4 @@
-import inputs from './inputs.js';
-import tgApi from './telegram.js';
-
+const tgApi = require('./telegram.js');
 const {
     status,
     botToken,
@@ -12,7 +10,7 @@ const {
     skipIsFail,
     cancelIsFail,
     defaultBranch,
-} = inputs;
+} = require('./inputs.js');
 
 const {
     GITHUB_REPOSITORY,
@@ -47,13 +45,15 @@ switch(status){
         isFailed = true;
 }
 
-await tgApi(botToken, 'sendMessage', {
-    chat_id: chatId,
-    parse_mode: 'HTML',
-    text: isFailed ? failText : successText,
-});
-
-if(isFailed && failOnStatus === 'true'){
-    console.log('::error::status of previous action is ' + status);
-    process.exit(1);
-}
+(async () => {
+    await tgApi(botToken, 'sendMessage', {
+        chat_id: chatId,
+        parse_mode: 'HTML',
+        text: isFailed ? failText : successText,
+    });
+    
+    if(isFailed && failOnStatus === 'true'){
+        console.log('::error::status of previous action is ' + status);
+        process.exit(1);
+    }
+})();
