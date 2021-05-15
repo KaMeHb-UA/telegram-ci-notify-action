@@ -43,5 +43,5 @@ inputs:
     required: false
     default: ''
 runs:
-  using: 'node15'
+  using: 'node12'
   main: 'app/index.js'
