@@ -46,12 +46,19 @@ switch(status){
 }
 
 (async () => {
-    await tgApi(botToken, 'sendMessage', {
-        chat_id: chatId,
-        parse_mode: 'HTML',
-        text: isFailed ? failText : successText,
-    });
-    
+    const text = isFailed ? failText : successText;
+    console.log('Sending message to ' + chatId + ' with text:\n' + text);
+    try{
+        await tgApi(botToken, 'sendMessage', {
+            chat_id: chatId,
+            parse_mode: 'HTML',
+            text,
+        });
+    } catch(e){
+        console.log('::error::' + e.message);
+        process.exit(1);
+    }
+
     if(isFailed && failOnStatus === 'true'){
         console.log('::error::status of previous action is ' + status);
         process.exit(1);
