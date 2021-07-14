@@ -49,7 +49,7 @@ Identify the branch that is default. If build/test fails on default branch, it w
 
 ```yaml
 name: Send notify to Telegam
-uses: KaMeHb-UA/telegram-ci-notify-action@v4
+uses: KaMeHb-UA/telegram-ci-notify-action@v5
 if: ${{ always() }}
 with:
   status: ${{ steps.<your_build_step_id>.outcome }}
