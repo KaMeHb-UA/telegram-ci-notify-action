@@ -18,12 +18,22 @@ module.exports = (botToken, method, params) => {
             res.on('error', reject);
             res.on('data', chunk => data += chunk);
             res.on('end', () => {
+                if(res.statusCode !== 200){
+                    try{
+                        const err = JSON.parse(data);
+                        reject(new Error(err.error_code + ': ' + err.description));
+                    } catch(e){
+                        reject(new Error(res.statusCode + ': ' + res.statusText));
+                    }
+                    return;
+                }
                 try{
                     resolve(JSON.parse(data));
                 } catch(e){
                     reject(e);
                 }
             });
+            
         });
         req.on('error', reject);
         req.write(JSON.stringify(params));
